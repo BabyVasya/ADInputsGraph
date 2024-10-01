@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import {EChartsOption} from "echarts";
@@ -16,13 +16,12 @@ import {EquipmentInputsEchartData} from "./Dto/EquipmentInputsEchartData";
     provideEcharts(),
   ]
 })
-export class SignalsGraphComponent {
+export class SignalsGraphComponent implements OnInit {
 
   public seriesData: EquipmentInputsEchartData[] = [];
   public options: EChartsOption[] = [];
 
-
-  constructor() {
+  ngOnInit() {
     this.setSeriesArray(data.analogChannels)
     this.setSeriesArray(data.statusChannels)
 
@@ -53,7 +52,7 @@ export class SignalsGraphComponent {
 
   }
 
-  public setSeriesArray(channels:Array<any>) {
+  private setSeriesArray(channels:Array<any>) {
     channels.forEach((channel:any) => {
       this.seriesData.push(
         new EquipmentInputsEchartData(
